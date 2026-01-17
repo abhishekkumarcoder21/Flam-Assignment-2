@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Real-time collaborative drawing canvas with global undo/redo">
+  <title>Collaborative Canvas</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Main drawing canvas -->
+  <canvas id="drawing-canvas"></canvas>
+  
+  <!-- Separate layer for user cursors (avoids redrawing strokes on cursor move) -->
+  <canvas id="cursor-canvas"></canvas>
+  
+  <!-- Toolbar for drawing tools -->
+  <div id="toolbar" class="toolbar"></div>
+  
+  <!-- Connected users list -->
+  <div id="user-list" class="user-list"></div>
+  
+  <!-- Socket.io client library (served by server) -->
+  <script src="/socket.io/socket.io.js"></script>
+  
+  <!-- Application bundle -->
+  <script src="dist/bundle.js" type="module"></script>
+</body>
+</html>
