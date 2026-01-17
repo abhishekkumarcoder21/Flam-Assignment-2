@@ -812,7 +812,8 @@ var App = (() => {
       }
     });
     canvasManager.setSettings(toolbar.getSettings());
-    const serverUrl = window.location.origin;
+    const BACKEND_URL = "https://canvas-collaborate.onrender.com";
+    const serverUrl = window.location.hostname === "localhost" ? window.location.origin : BACKEND_URL;
     socketClient = new SocketClient(serverUrl, {
       onConnected: (userId) => {
         console.log("[Main] Connected as user:", userId);
