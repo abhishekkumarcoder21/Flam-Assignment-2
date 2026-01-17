@@ -35,13 +35,20 @@ const io = new Server(httpServer, {
 const roomManager = new RoomManager();
 
 // Serve static files from client directory
-// Note: Using path.join to handle both dev and production paths
-const clientPath = path.join(__dirname, '..', 'client');
+// In dev: __dirname is 'server/', client is '../client'
+// In prod: __dirname is 'dist/server/', client is '../../client'
+const isProduction = __dirname.includes('dist');
+const clientPath = isProduction
+    ? path.join(__dirname, '..', '..', 'client')
+    : path.join(__dirname, '..', 'client');
 app.use(express.static(clientPath));
 
 // Serve Socket.io client library (bundled with socket.io)
+const nodeModulesPath = isProduction
+    ? path.join(__dirname, '..', '..', 'node_modules')
+    : path.join(__dirname, '..', 'node_modules');
 app.get('/socket.io/socket.io.js', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'node_modules', 'socket.io', 'client-dist', 'socket.io.js'));
+    res.sendFile(path.join(nodeModulesPath, 'socket.io', 'client-dist', 'socket.io.js'));
 });
 
 // Fallback to index.html for SPA routing

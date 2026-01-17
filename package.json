@@ -4,9 +4,9 @@
   "description": "Real-time collaborative drawing canvas with global undo/redo",
   "main": "server/server.js",
   "scripts": {
-    "start": "ts-node server/server.ts",
+    "start": "node dist/server/server.js",
     "dev": "ts-node-dev --respawn server/server.ts",
-    "build": "tsc",
+    "build": "tsc && npm run build:client",
     "build:client": "esbuild client/main.ts --bundle --outfile=client/dist/bundle.js --format=iife --global-name=App --external:socket.io-client"
   },
   "dependencies": {
